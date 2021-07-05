@@ -18,7 +18,7 @@ public class Helper {
 
     //global arrays
     public static int cardinality = ParentWindow.INIT_CARDINALITY;
-    public static int upperBd = 400; //this is a random number
+    public static int upperBd = ParentWindow.INIT_UPPERBD;
 
     Helper(PApplet p){
         Helper.p = p;

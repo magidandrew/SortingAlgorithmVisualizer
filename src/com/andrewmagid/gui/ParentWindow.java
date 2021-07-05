@@ -27,12 +27,13 @@ public class ParentWindow extends JFrame {
 
     //---Constants---
     //global - public
-    public static final int INIT_FPS = 300;
+    public static final int INIT_FPS = 25;
     public static final int INIT_CARDINALITY = 50;
+    public static final int INIT_UPPERBD = 50;
 
     //private
     private static final int MIN_FPS = 0;
-    private static final int MAX_FPS = 600;
+    private static final int MAX_FPS = 400;
     private static final int MIN_CARDINALITY = 2;
     private static final int MAX_CARDINALITY = 5000;
     private static final int STEP_SIZE_CARDINALITY = 1;
@@ -52,6 +53,8 @@ public class ParentWindow extends JFrame {
 
         splitPane.setRightComponent(controlPanel);
         splitPane.setLeftComponent(graphicsPanel);
+        //remove divider
+        splitPane.setDividerSize(0);
 
         parentFrame.pack();
         parentFrame.setSize(1100,650);

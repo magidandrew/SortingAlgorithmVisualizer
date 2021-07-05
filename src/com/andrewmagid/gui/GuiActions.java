@@ -10,17 +10,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GuiActions {
-    static class RunAlgoListener extends AbstractAction{
+    static class RunAlgoListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e){
             Helper.sorted = Algorithms.mergeSort(Helper.unsortedArr).get(0);
+
+            //TODO: DECIDE WHICH ALGORITHM TO USE HERE!
             Helper.indicesHighlighted = Algorithms.mergeSort(Helper.unsortedArr).get(1);
+
             Helper.originalUnsortedSize = Helper.sorted.size();
             Helper.setRunningAlgoStateTrue();
             Helper.startLoop();
         }
     }
 
-    static class GenerateDatasetListener extends AbstractAction{
+    static class GenerateDatasetListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e){
             //TODO: have size and upperbd dependent on ui elements
             Helper.generateDatasetAndDisplay();
@@ -51,7 +56,6 @@ public class GuiActions {
                 Helper.upperBd = source.getValue();
                 Helper.generateDatasetAndDisplay();
             }
-
         }
     }
 
