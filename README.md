@@ -4,9 +4,9 @@
 [insert demo gif here]
 
 ## Who this is for
-Any student who wants to see an implementation of common sorting algorithms in Java.
-Anyone who is interested in combining Swing gui with Processing graphics applications.
-For myself, as I wanted to develop a better fluency with swing and sorting algorithms
+- Any student who wants to see an implementation of common sorting algorithms in Java.
+- Anyone who is interested in combining Swing gui with Processing graphics applications.
+- For myself, as I wanted to develop a better fluency with swing and sorting algorithms
 while being able to make an interesting visual product.
 
 ## Algorithms

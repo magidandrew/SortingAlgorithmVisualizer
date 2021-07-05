@@ -1,11 +1,8 @@
 package com.andrewmagid.gui;
 
-import main.Helper;
 import processing.awt.PSurfaceAWT;
 import javax.swing.*;
 import java.awt.*;
-import com.andrewmagid.gui.GuiActions;
-
 
 public class ParentWindow extends JFrame {
     //panels
@@ -18,16 +15,27 @@ public class ParentWindow extends JFrame {
     Button generateBtn;
     JComboBox<String> algoCombo;
     JSlider fpsSlider;
+    JSlider cardinalitySlider;
+    JSpinner cardinalitySpinner;
+    JSlider upperBdSlider;
 
     //information elements
     JLabel sliderLabel;
+    JLabel cardinalityLabel;
+    JLabel upperBdLabel;
     public static JProgressBar progressBar;
 
+    //---Constants---
+    //global - public
+    public static final int INIT_FPS = 300;
+    public static final int INIT_CARDINALITY = 50;
 
-    //Constants
+    //private
     private static final int MIN_FPS = 0;
     private static final int MAX_FPS = 600;
-    public static final int INIT_FPS = 300;
+    private static final int MIN_CARDINALITY = 2;
+    private static final int MAX_CARDINALITY = 5000;
+    private static final int STEP_SIZE_CARDINALITY = 1;
 
     public ParentWindow(JFrame parentFrame, PSurfaceAWT.SmoothCanvas canvas){
         JPanel topPanel = new JPanel();
@@ -52,7 +60,7 @@ public class ParentWindow extends JFrame {
     }
 
     public void createGraphicsPanel(PSurfaceAWT.SmoothCanvas canvas){
-        graphicsPanel = new JPanel();
+            graphicsPanel = new JPanel();
         graphicsPanel.setLayout(new BorderLayout());
 
         graphicsPanel.add(canvas);
@@ -70,7 +78,15 @@ public class ParentWindow extends JFrame {
         sliderLabel = new JLabel("Frames Per Second", JLabel.CENTER);
         sliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        cardinalityLabel= new JLabel("Cardinality", JLabel.CENTER);
+        cardinalityLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        upperBdLabel= new JLabel("Upper Bound (Data Spread)", JLabel.CENTER);
+        upperBdLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        //sliders
         fpsSlider = new JSlider(JSlider.HORIZONTAL, MIN_FPS, MAX_FPS, INIT_FPS);
+        upperBdSlider = new JSlider(JSlider.HORIZONTAL, 0,100,50); //THIS SHOULD BE DEPENDENT ON CANVAS SIZE!!
 
         //progress bar
 //        progressBar = new JProgressBar();
@@ -81,12 +97,20 @@ public class ParentWindow extends JFrame {
         fpsSlider.setPaintTicks(true);
         fpsSlider.setPaintLabels(true);
 
+        upperBdSlider.setMajorTickSpacing(25);
+        upperBdSlider.setPaintTicks(true);
+        upperBdSlider.setPaintLabels(true);
 
-        //bind ui elements to actions
+        //spinners
+        cardinalitySpinner = new JSpinner(new SpinnerNumberModel(INIT_CARDINALITY, MIN_CARDINALITY,
+                MAX_CARDINALITY, STEP_SIZE_CARDINALITY));
+
+        //bind ui elements to listeners
         runBtn.addActionListener(new GuiActions.RunAlgoListener());
         generateBtn.addActionListener(new GuiActions.GenerateDatasetListener());
         fpsSlider.addChangeListener(new GuiActions.FrameRateListener());
-
+        cardinalitySpinner.addChangeListener(new GuiActions.CardinalityListener());
+        upperBdSlider.addChangeListener(new GuiActions.UpperBdListener());
 
         // add to panel
         controlPanel.add(algoCombo);
@@ -94,8 +118,12 @@ public class ParentWindow extends JFrame {
         controlPanel.add(generateBtn);
         controlPanel.add(sliderLabel);
         controlPanel.add(fpsSlider);
+
+        controlPanel.add(cardinalityLabel);
+        controlPanel.add(cardinalitySpinner);
+
+        controlPanel.add(upperBdLabel);
+        controlPanel.add(upperBdSlider);
 //        controlPanel.add(progressBar);
     }
-
-
 }

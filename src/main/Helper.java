@@ -1,5 +1,6 @@
 package main;
 
+import com.andrewmagid.gui.ParentWindow;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -13,6 +14,11 @@ public class Helper {
     public static boolean isRunningAlgo = false;
     public static PApplet p;
     public static int originalUnsortedSize;
+
+
+    //global arrays
+    public static int cardinality = ParentWindow.INIT_CARDINALITY;
+    public static int upperBd = 400; //this is a random number
 
     Helper(PApplet p){
         Helper.p = p;
@@ -35,6 +41,12 @@ public class Helper {
 
     public static void startLoop(){
         p.loop();
+    }
+
+    public static void generateDatasetAndDisplay() {
+        Helper.setRunningAlgoStateFalse();
+        Helper.generateNewDataset(Helper.cardinality, Helper.upperBd);
+        Helper.startLoop();
     }
 
 

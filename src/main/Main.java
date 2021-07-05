@@ -1,11 +1,11 @@
 package main;
 
-import javafx.scene.Parent;
 import processing.core.PApplet;
 
 import javax.swing.*;
 
 import processing.awt.PSurfaceAWT.SmoothCanvas;
+import processing.core.PImage;
 import processing.core.PSurface;
 
 import com.andrewmagid.gui.*;
@@ -17,6 +17,7 @@ public class Main extends PApplet {
     private Painter p;
     private Helper helper;
     public static int frameRate = ParentWindow.INIT_FPS;
+    private PImage icon;
 
     public void settings(){
         size(900,650);
@@ -26,6 +27,7 @@ public class Main extends PApplet {
         background(255);
         p = new Painter(this, 50);
         helper = new Helper(this);
+        Helper.generateDatasetAndDisplay();
         frameRate(ParentWindow.INIT_FPS);
 
 //        sorted = Algorithms.mergeSort(unsortedArr);
@@ -66,6 +68,7 @@ public class Main extends PApplet {
         JFrame frame = new JFrame("Algorithm Visualizer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+//        frame.setIconImage(new ImageIcon("/Users/andrewmagid/IdeaProjects/ProcessingSetup/src/icon.png").getImage());
         //create your sketch
         Main pt = new Main();
 
@@ -82,8 +85,8 @@ public class Main extends PApplet {
 
         ParentWindow window = new ParentWindow(frame, smoothCanvas);
 
-
         //start your sketch
         ps.startThread();
+
     }
 }
