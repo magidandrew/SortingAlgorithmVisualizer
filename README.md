@@ -13,15 +13,14 @@ while being able to make an interesting visual product.
 All algorithms were self-implemented and can be located in the Algorithms package.
 The following algorithms are currently implemented:
 - BubbleSort
+- SelectionSort
 
 The following will be implemented in the near future:
 -  InsertionSort 
--  SelectionSort
 -  MergeSort
 -  HeapSort
 -  QuickSort
 -  ShellSort
--  BubbleSort
 -  CombSort
 -  CountingSort
 -  BucketSort
@@ -29,11 +28,11 @@ The following will be implemented in the near future:
 -  TreeSort
 -  CubeSort
 
-## Installation
-TODO: allow build with ant.
+## How to Run 
+`ant run`
 
 ## Dependencies
 The program is written entirely in Java using the swing and Processing libraries.
 - Swing
-- [Processing3](https://processing.org/download/)
-
+- [Processing](https://processing.org/download/)
+- ant
