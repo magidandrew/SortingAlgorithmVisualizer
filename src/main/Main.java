@@ -43,9 +43,11 @@ public class Main extends PApplet {
                 //update framerate!!
                 frameRate(frameRate);
                 //draw and remove
-                p.drawBoxes(sorted.get(0), indicesHighlighted.get(0));
+//                p.drawBoxes(sorted.get(0), indicesHighlighted.get(0));
+                p.drawBoxes(sorted.get(0));
                 sorted.remove(0);
-                indicesHighlighted.remove(0);
+//                indicesHighlighted.remove(0);
+
 //                ParentWindow.progressBar.setValue(originalUnsortedSize - sorted.size());
 //                System.out.println(originalUnsortedSize - sorted.size());
 //                ParentWindow.progressBar.update(ParentWindow.progressBar.getGraphics());

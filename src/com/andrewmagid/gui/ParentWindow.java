@@ -13,7 +13,8 @@ public class ParentWindow extends JFrame {
     //interface elements
     Button runBtn;
     Button generateBtn;
-    JComboBox<String> algoCombo;
+    //FIXME: bad design to make this public static
+    public static JComboBox<String> algoCombo;
     JSlider fpsSlider;
     JSlider cardinalitySlider;
     JSpinner cardinalitySpinner;

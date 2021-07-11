@@ -1,5 +1,5 @@
 package com.andrewmagid.gui;
-import main.Algorithms;
+import com.andrewmagid.algorithms.*;
 import main.Helper;
 import main.Main;
 
@@ -13,10 +13,23 @@ public class GuiActions {
     static class RunAlgoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            Helper.sorted = Algorithms.mergeSort(Helper.unsortedArr).get(0);
-
             //TODO: DECIDE WHICH ALGORITHM TO USE HERE!
-            Helper.indicesHighlighted = Algorithms.mergeSort(Helper.unsortedArr).get(1);
+            String algo = (String) ParentWindow.algoCombo.getSelectedItem();
+            if (algo != null) {
+                switch(algo){
+                    case "BubbleSort":
+                        Helper.sorted = BubbleSort.bubbleSort(Helper.unsortedArr);
+                        Helper.indicesHighlighted = BubbleSort.getBubbleSortHighlighted(Helper.unsortedArr);
+                        break;
+                    case "SelectionSort":
+                        SelectionSort selectionSort = new SelectionSort(Helper.unsortedArr);
+                        Helper.sorted = selectionSort.getSortedArray();
+                        Helper.indicesHighlighted = selectionSort.getHighlightedArray();
+                        break;
+
+
+                }
+            }
 
             Helper.originalUnsortedSize = Helper.sorted.size();
             Helper.setRunningAlgoStateTrue();
