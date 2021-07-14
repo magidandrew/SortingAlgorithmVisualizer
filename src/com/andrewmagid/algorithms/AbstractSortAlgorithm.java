@@ -19,7 +19,7 @@ public abstract class AbstractSortAlgorithm {
         sorted.add(0, new ArrayList<>());
         sorted.add(sorted.size() - 1, new ArrayList<>());
         highlighted.add(0, new ArrayList<>());
-        highlighted.add(highlighted.size() - 1, new ArrayList<>());
+        highlighted.add(highlighted.size(), new ArrayList<>());
     }
 
     public void assertArrSizes() {

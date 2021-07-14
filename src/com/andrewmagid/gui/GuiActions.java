@@ -17,17 +17,16 @@ public class GuiActions {
             String algo = (String) ParentWindow.algoCombo.getSelectedItem();
             if (algo != null) {
                 switch(algo){
-//                    case "BubbleSort":
-//                        Helper.sorted = BubbleSort.bubbleSort(Helper.unsortedArr);
-//                        Helper.indicesHighlighted = BubbleSort.getBubbleSortHighlighted(Helper.unsortedArr);
-//                        break;
+                    case "BubbleSort":
+                        BubbleSort bubbleSort = new BubbleSort(Helper.unsortedArr);
+                        Helper.sorted = bubbleSort.getSortedArray();
+                        Helper.indicesHighlighted = bubbleSort.getHighlightedArray();
+                        break;
                     case "SelectionSort":
                         SelectionSort selectionSort = new SelectionSort(Helper.unsortedArr);
                         Helper.sorted = selectionSort.getSortedArray();
                         Helper.indicesHighlighted = selectionSort.getHighlightedArray();
                         break;
-
-
                 }
             }
 
