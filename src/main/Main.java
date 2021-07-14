@@ -1,67 +1,21 @@
 package main;
 
-import processing.core.PApplet;
-
-import javax.swing.*;
-
+import com.andrewmagid.gui.ParentWindow;
 import processing.awt.PSurfaceAWT.SmoothCanvas;
+import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PSurface;
 
-import com.andrewmagid.gui.*;
-//FIXME: this is import global variables. Do not want this to be like magic.
+import javax.swing.*;
+
 import static main.Helper.*;
 
 public class Main extends PApplet {
+    public static int frameRate = ParentWindow.INIT_FPS;
     //TODO: THIS NEEDS TO BE CLEANED UP AND INITIALIZED
     private Painter p;
     private Helper helper;
-    public static int frameRate = ParentWindow.INIT_FPS;
     private PImage icon;
-
-    public void settings(){
-        size(900,650);
-    }
-
-    public void setup(){
-        background(255);
-        p = new Painter(this, 50);
-        helper = new Helper(this);
-        Helper.generateDatasetAndDisplay();
-        frameRate(ParentWindow.INIT_FPS);
-
-//        sorted = Algorithms.mergeSort(unsortedArr);
-    }
-
-    public void draw(){
-        if(isRunningAlgo) {
-            if(sorted.size() == 0){
-                isRunningAlgo = false;
-                noLoop();
-            }
-            else{
-                //update framerate!!
-                frameRate(frameRate);
-                //draw and remove
-//                p.drawBoxes(sorted.get(0), indicesHighlighted.get(0));
-                p.drawBoxes(sorted.get(0));
-                sorted.remove(0);
-//                indicesHighlighted.remove(0);
-
-//                ParentWindow.progressBar.setValue(originalUnsortedSize - sorted.size());
-//                System.out.println(originalUnsortedSize - sorted.size());
-//                ParentWindow.progressBar.update(ParentWindow.progressBar.getGraphics());
-//                ParentWindow.progressBar.repaint();
-            }
-        }
-        //if not running, display the current unsorted arr
-        else{
-            p.drawBoxes(unsortedArr);
-            noLoop();
-        }
-    }
-
-
 
     public static void main(String[] args) {
 //        PApplet.main("main.Main");
@@ -81,7 +35,7 @@ public class Main extends PApplet {
         ps.setSize(900, 650);
 
         //get the SmoothCanvas that holds the PSurface
-        SmoothCanvas smoothCanvas = (SmoothCanvas)ps.getNative();
+        SmoothCanvas smoothCanvas = (SmoothCanvas) ps.getNative();
 
 //        frame.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
 
@@ -90,5 +44,46 @@ public class Main extends PApplet {
         //start your sketch
         ps.startThread();
 
+    }
+
+    public void settings() {
+        size(900, 650);
+    }
+
+    public void setup() {
+        background(255);
+        p = new Painter(this, 50);
+        helper = new Helper(this);
+        Helper.generateDatasetAndDisplay();
+        frameRate(ParentWindow.INIT_FPS);
+
+//        sorted = Algorithms.mergeSort(unsortedArr);
+    }
+
+    public void draw() {
+        if (isAlgoRunning) {
+            if (sorted.size() == 0) {
+                isAlgoRunning = false;
+                noLoop();
+            } else {
+                //update framerate!!
+                frameRate(frameRate);
+                //draw and remove
+                p.drawBoxes(sorted.get(0), indicesHighlighted.get(0));
+                indicesHighlighted.remove(0);
+                sorted.remove(0);
+//                p.drawBoxes(sorted.get(0));
+
+//                ParentWindow.progressBar.setValue(originalUnsortedSize - sorted.size());
+//                System.out.println(originalUnsortedSize - sorted.size());
+//                ParentWindow.progressBar.update(ParentWindow.progressBar.getGraphics());
+//                ParentWindow.progressBar.repaint();
+            }
+        }
+        //if not running, display the current unsorted arr
+        else {
+            p.drawBoxes(unsortedArr);
+            noLoop();
+        }
     }
 }

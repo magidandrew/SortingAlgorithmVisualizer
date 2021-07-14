@@ -1,59 +1,55 @@
 package com.andrewmagid.algorithms;
 
-import javax.print.attribute.IntegerSyntax;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Map;
 
 //---Algo---
 // Iterate over entire array and find the least element.
 // Swap this with the element that's one past the "sorted" subarray.
-public class SelectionSort {
-    private ArrayList<ArrayList<Integer>> sorted;
-    private ArrayList<ArrayList<Integer>> highlighted;
-
-    public SelectionSort(ArrayList<Integer> unsorted){
-        sorted = selectionSort(unsorted);
-        highlighted = getHighlightedSelectionSort(unsorted);
+public class SelectionSort extends AbstractSortAlgorithm {
+    public SelectionSort(ArrayList<Integer> unsorted) {
+        super(unsorted);
     }
 
-    //FIXME: show comparisons too, not just when an item gets swapped
-    public ArrayList<ArrayList<Integer>> selectionSort(ArrayList<Integer> unsorted) {
+    @Override
+    public ArrayList<ArrayList<Integer>> sortAlgo(ArrayList<Integer> unsorted) {
         ArrayList<Integer> unsortedInput = new ArrayList<>(unsorted);
-        ArrayList<ArrayList<Integer>> sorted = new ArrayList<>();
+        ArrayList<Map.Entry<Integer, int[]>> iterHighlight = new ArrayList<>();
 
-        for(int sortedPointer=0; sortedPointer<unsortedInput.size(); sortedPointer++){
+        for (int sortedPointer = 0; sortedPointer < unsortedInput.size(); sortedPointer++) {
             int min = unsortedInput.get(sortedPointer);
             int minLocation = sortedPointer;
 
-            for(int leastElementPt=sortedPointer; leastElementPt<unsortedInput.size(); leastElementPt++){
-                if(min > unsortedInput.get(leastElementPt)) {
+            for (int leastElementPt = sortedPointer; leastElementPt < unsortedInput.size(); leastElementPt++) {
+                //highlight this comparison between min val and second traveling pointer
+                if (min > unsortedInput.get(leastElementPt)) {
                     min = unsortedInput.get(leastElementPt);
                     minLocation = leastElementPt;
                 }
+
+                this.sorted.add(new ArrayList<>(unsortedInput));
+                iterHighlight.clear();
+                iterHighlight.add(Map.entry(sortedPointer, new int[]{255, 0, 0}));
+                iterHighlight.add(Map.entry(leastElementPt, new int[]{0, 0, 255}));
+                iterHighlight.add(Map.entry(minLocation, new int[]{0, 255, 0}));
+                this.highlighted.add(new ArrayList<>(iterHighlight));
             }
+
             //swapping
             int tmp = unsortedInput.get(sortedPointer);
             unsortedInput.set(sortedPointer, min);
             unsortedInput.set(minLocation, tmp);
-//            sorted.add(new ArrayList<>(unsortedInput));
-            if(minLocation != sortedPointer){
-                sorted.add(new ArrayList<>(unsortedInput));
+            if (minLocation != sortedPointer) {
+                this.sorted.add(new ArrayList<>(unsortedInput));
+                iterHighlight.clear();
+                iterHighlight.add(Map.entry(minLocation, new int[]{255, 255, 0}));
+                iterHighlight.add(Map.entry(sortedPointer, new int[]{255, 255, 0}));
+                this.highlighted.add(new ArrayList<>(iterHighlight));
             }
         }
-        return sorted;
-    }
 
-    public ArrayList<ArrayList<Integer>> getHighlightedSelectionSort(ArrayList<Integer> unsorted) {
-        ArrayList<ArrayList<Integer>> foo = new ArrayList<>();
-        foo.add(new ArrayList<>(Arrays.asList(0)));
-        return foo;
-    }
-
-    public ArrayList<ArrayList<Integer>> getSortedArray() {
-        return sorted;
-    }
-
-    public ArrayList<ArrayList<Integer>> getHighlightedArray() {
-        return highlighted;
+        addSetPadding();
+        assertArrSizes();
+        return this.sorted;
     }
 }

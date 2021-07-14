@@ -2,7 +2,7 @@ package main;
 
 public class Algorithms {
 
-    public static String[] getAlgorithmNames(){
+    public static String[] getAlgorithmNames() {
         //TO IMPLEMENT:
         /*
         InsertionSort
@@ -21,6 +21,5 @@ public class Algorithms {
          */
         return new String[]{"SelectionSort", "BubbleSort"};
     }
-
 
 }

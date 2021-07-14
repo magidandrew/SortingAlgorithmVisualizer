@@ -1,6 +1,5 @@
 <project name="AlgorithmVisualizer" basedir=".">
 
-
     <property name="lib.dir" value="lib"/>
     <property name="lib.name" value="core.jar"/>
     <property name="main" value="main.Main"/>

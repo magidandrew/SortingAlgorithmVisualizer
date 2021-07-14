@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
+
 import processing.core.*;
 
 public class Painter {
@@ -33,7 +35,8 @@ public class Painter {
 
     }
 
-    public void drawBoxes(ArrayList<Integer> input, ArrayList<Integer> indicesToHighlight) {
+    public void drawBoxes(ArrayList<Integer> input, ArrayList<Map.Entry<Integer, int[]>> indicesToHighlight) {
+//        public void drawBoxes(ArrayList<Integer> input, ArrayList<Integer> indicesToHighlight) {
         if(input.size() == 0){
             return;
         }
@@ -48,9 +51,16 @@ public class Painter {
         int startBoxLocation = padding;
         for(int i=0; i<input.size(); i++){
             p.fill(0,0,0);
-            if(indicesToHighlight.contains(i)){
-                p.fill(0,0,255);
+            //look thru all and see if key contains
+            for (Map.Entry<Integer, int[]> arr : indicesToHighlight){
+                if (arr.getKey() == i){
+                    //RGB tuple
+                    p.fill(arr.getValue()[0], arr.getValue()[1], arr.getValue()[2]);
+                }
             }
+//            if(indicesToHighlight.contains(i)){
+//                p.fill(0,0,255);
+//            }
             p.rect(startBoxLocation,  p.height - padding, boxWidth, -input.get(i)*boxHeightScale);
             startBoxLocation += boxWidth;
         }
