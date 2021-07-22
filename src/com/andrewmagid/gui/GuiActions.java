@@ -17,6 +17,7 @@ public class GuiActions {
             String algo = (String) ParentWindow.algoCombo.getSelectedItem();
             if (algo != null) {
                 switch(algo){
+                    //TODO: CAN THIS BE REMEDIED WITH THE FACTORY PATTERN?
                     case "BubbleSort":
                         BubbleSort bubbleSort = new BubbleSort(Helper.unsortedArr);
                         Helper.sorted = bubbleSort.getSortedArray();
