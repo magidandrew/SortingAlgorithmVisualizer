@@ -1,7 +1,7 @@
 # Sorting Algorithm Visualizer
 
 ## Demo
-[insert demo gif here]
+![demo gif](algovisualizerdemo.gif)
 
 ## Who this is for
 - Any student who wants to see an implementation of common sorting algorithms in Java.
